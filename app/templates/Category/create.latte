@@ -1,0 +1,8 @@
+{block content}
+
+<h1>Create a new category</h1>
+{if $user->isLoggedIn()}
+    {control createCategoryForm}
+{else}
+    To create categories you have to login first.
+{/if}

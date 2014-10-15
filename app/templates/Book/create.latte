@@ -1,0 +1,7 @@
+{block content}
+<h1>Create a new book</h1>
+{if $user->isLoggedIn()}
+    {control createBookForm}
+{else}
+    To create books you have to login first.
+{/if}

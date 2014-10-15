@@ -1,0 +1,22 @@
+{block content}
+
+<h1>Categories</h1>
+
+<table class="table table-striped">
+    <th>ID</th><th>Description</th>
+    {if $user->isLoggedIn()}
+        <th>Action</th>
+    {/if}
+    <tr n:foreach="$categories as $category">
+        <td>{$category->id}</td>
+        <td>{$category->description}</td>
+        {if $user->isLoggedIn()}
+            <td>
+                <a class="btn btn-sm btn-primary" n:href="delete! $category->id">Delete</a>
+            </td>
+        {/if}
+    </tr>
+</table>
+{if $user->isLoggedIn()}
+    <a class="btn btn-sm btn-primary" n:href="Category:create">New Category</a>
+{/if}

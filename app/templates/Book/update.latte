@@ -1,0 +1,8 @@
+{block content}
+
+<h1>Update book</h1>
+{if $user->isLoggedIn()}
+    {control createBookForm}
+{else}
+    You have to sign in to update book.
+{/if}

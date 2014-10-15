@@ -1,0 +1,48 @@
+{block content}
+
+<h1>Books</h1>
+
+<table class="table table-striped">
+    <th>ID</th><th>name</th><th>author</th><th>ISDN</th><th>Category</th>
+    {if $user->isLoggedIn()}
+        <th>Action</th>
+    {/if}
+    <tr n:foreach="$books as $book">
+        <td>{$book->id}</td>
+        <td>{$book->name}</td>
+        <td>{$book->author}</td>
+        <td>{$book->isdn}</td>
+        <td>{$book->description}</td>
+        {if $user->isLoggedIn()}
+        <td>
+            <a class="btn btn-sm btn-primary" n:href="Book:update $book->id">Update</a>
+            <a class="btn btn-sm btn-primary" n:href="delete! $book->id">Delete</a>
+        </td>
+        {/if}
+    </tr>
+</table>
+
+<!-- ********* PAGINATOR START ********* -->
+{if $numberOfBooks > $paginator->getItemsPerPage()}
+    <a n:href="this, page => $paginator->getPage()-1" n:if="!$paginator->isFirst()">Previous</a>
+    {for $i=1; $i <= $paginator->getLastPage(); $i++}
+        {if $paginator->getPage() == $i}
+            {$i}
+        {else}
+            <a n:href="this, page => $i">{$i}</a>
+        {/if}
+    {/for}
+    <a n:href="this, page => $paginator->getPage()+1" n:if="!$paginator->isLast()">Next</a>
+{/if}
+<!-- ********* PAGINATOR END ********* -->
+
+{if $user->isLoggedIn()}
+    <br>
+    <br>
+    <a class="btn btn-sm btn-primary" n:href="Book:create">New book</a>
+    <a class="btn btn-sm btn-primary" n:href="Book:generate">Generate 1000 books</a>
+    <a class="btn btn-sm btn-primary" n:href="Book:deleteAll">Delete all books</a>
+    <a class="btn btn-sm btn-primary" n:href="Book:cleanCache">Clean cache</a>
+{/if}
+<br>
+<br>
